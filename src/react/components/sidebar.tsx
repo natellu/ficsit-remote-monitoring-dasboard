@@ -21,6 +21,7 @@ import { MdTrain } from "react-icons/md";
 import { RiCoupon2Fill } from "react-icons/ri";
 import { TbDrone } from "react-icons/tb";
 import { Link } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 type LinksGroup = {
   path: string;
@@ -108,11 +109,7 @@ export const Sidebar: React.FC = () => {
     >
       <Stack spacing={isFullsize ? 2 : 1}>
         {isFullsize ? (
-          <Grid
-            container
-            display="flex"
-            alignItems="center"
-          >
+          <Grid container display="flex" alignItems="center">
             <Grid marginRight="6px">
               <IconButton
                 onClick={() => {
@@ -129,10 +126,7 @@ export const Sidebar: React.FC = () => {
             </Grid>
           </Grid>
         ) : (
-          <Tooltip
-            placement="right"
-            title="Expand Menu"
-          >
+          <Tooltip placement="right" title="Expand Menu">
             <IconButton
               size="lg"
               onClick={() => {
@@ -147,7 +141,7 @@ export const Sidebar: React.FC = () => {
         )}
         {linksGroup.map((group) => {
           return (
-            <React.Fragment key={crypto.randomUUID()}>
+            <React.Fragment key={uuidv4()}>
               <Divider />
               {group.map((link) => {
                 if (link.isDisabled) return null;
@@ -171,20 +165,9 @@ export const Sidebar: React.FC = () => {
                   );
                 }
                 return (
-                  <Tooltip
-                    key={link.path}
-                    placement="right"
-                    title={link.label}
-                  >
-                    <Link
-                      style={{ textDecoration: "none" }}
-                      to={link.path}
-                    >
-                      <IconButton
-                        size="lg"
-                        color="neutral"
-                        variant="plain"
-                      >
+                  <Tooltip key={link.path} placement="right" title={link.label}>
+                    <Link style={{ textDecoration: "none" }} to={link.path}>
+                      <IconButton size="lg" color="neutral" variant="plain">
                         {link.icon}
                       </IconButton>
                     </Link>
